@@ -220,7 +220,6 @@ class PathFinder(object):
                     queue.decrease_key(v.queue_key)
                     v.parent = u
 
-
         # Result
         path = []
         current = destination
