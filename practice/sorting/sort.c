@@ -348,6 +348,7 @@ void heap_sort_min(int a[], int length)
 		// print_array(a, i);
 	}
 }
+
 int main(int argc, char *argv[]) {
 	int array[10] = {2, 4, 3, 1, 6, 3, 7, 10, 0, 5};
 

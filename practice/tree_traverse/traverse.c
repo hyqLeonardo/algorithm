@@ -5,65 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MaxSize 50
-#define TRUE 1
-#define FALSE 0
-
-/* 
- * struct definition of tree node
- */
-typedef struct BiTNode {
-	int data;	/* data */
-	struct BiTNode *lchild; 	/* left child pointer */
-	struct BiTNode *rchild;		/* right child pointer */
-} BiTNode, *BiTree;
-
-void visit(BiTree node)
-{
-	printf("%d ", node->data);
-}
-
-/*
- * struct definition of array based stack
- */
-typedef struct a_stack {
-	BiTree data[MaxSize];
-	int top;	/* position of top element */
-} a_stack;
-
-void init_stack(a_stack *stack)
-{
-	(*stack).top = -1;
-}
-
-int stack_empty(a_stack *stack)
-{
-	return stack->top == -1 ? TRUE : FALSE;
-}
-
-int push(a_stack *stack, BiTree a)
-{
-	if (stack->top == MaxSize-1)
-		return FALSE;
-	stack->data[++stack->top] = a;
-	return TRUE; 
-}
-
-int pop(a_stack *stack, BiTree *x)
-{
-	if (stack->top == -1)
-		return FALSE;
-	*x = stack->data[stack->top--];
-	return TRUE;		
-}
-
-int get_top(a_stack *stack, BiTree *x)
-{
-	if (stack->top == -1)
-		return FALSE;
-	*x = stack->data[stack->top];
-	return TRUE;
-}
+// "bst.h" already included from stack.h, so don't include again 
+// if included, error message : bst.h:6:16: error: redefinition of ‘struct BiTNode’
+#include "stack.h"
 
 /* traverse using recursion */
 void pre_order(BiTree T)
@@ -218,9 +162,11 @@ int main(int argc, char *argv[])
 	BiTree root = &T;
 	BiTree root_full = &T_full;
 
-	post_order_2(root_full);
+	pre_order_2(root_full);
 	printf("\n");
-	post_order(root_full);
+	post_order(root);
+	printf("\n");
+	post_order_2(root);
 	printf("\n");
 
 	return 0;
