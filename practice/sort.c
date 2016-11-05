@@ -310,7 +310,7 @@ void adjust_down_min(int a[], int k, int length)
 	while (i < length) {
 		// printf("i is %d\n", i);
 		if (i < length-1 && a[i] > a[i+1])
-			i++;	/* get the bigger child */
+			i++;	/* get the smaller child */
 		if (a[k] <= a[i])
 			break;
 		else {
