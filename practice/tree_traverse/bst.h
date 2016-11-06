@@ -9,4 +9,6 @@ typedef struct BiTNode {
 	struct BiTNode *rchild;		/* right child pointer */
 } BiTNode, *BiTree;
 
-void visit(BiTree node);
+void visit_bst(BiTree node);
+void bst_toy(BiTree root);
+void bst_toy_complete(BiTree root);

@@ -7,13 +7,14 @@
 
 // "bst.h" already included from stack.h, so don't include again 
 // if included, error message : bst.h:6:16: error: redefinition of ‘struct BiTNode’
-#include "stack.h"
+#include "stack.h"	/* for stack based implementation of BST traverse */
+#include "tbt.h"	/* for Threaded Binary Tree */
 
 /* traverse using recursion */
 void pre_order(BiTree T)
 {
 	if (T != NULL) {
-		visit(T);
+		visit_bst(T);
 		pre_order(T->lchild);
 		pre_order(T->rchild);
 	}
@@ -23,7 +24,7 @@ void in_order(BiTree T)
 {
 	if (T != NULL) {
 		in_order(T->lchild);
-		visit(T);
+		visit_bst(T);
 		in_order(T->rchild);
 	}
 }
@@ -33,7 +34,7 @@ void post_order(BiTree T)
 	if (T != NULL) {
 		post_order(T->lchild);
 		post_order(T->rchild);
-		visit(T);
+		visit_bst(T);
 	}
 }
 
@@ -56,7 +57,7 @@ void pre_order_2(BiTree T)
 	while (p || !stack_empty(stack)) {
 		if (p) {
 			push(stack, p);
-			visit(p);
+			visit_bst(p);
 			p = p->lchild;
 		}
 		else {
@@ -79,7 +80,7 @@ void in_order_2(BiTree T)
 		}
 		else {
 			pop(stack, &p);
-			visit(p);
+			visit_bst(p);
 			p = p->rchild;
 		}
 	}
@@ -103,7 +104,7 @@ void post_order_2(BiTree T)
 				p = p->rchild;	/* next loop will push this into stack */
 			else {
 				pop(stack, &p);
-				visit(p);
+				visit_bst(p);
 				r = p;
 				p = NULL;	
 			}
@@ -132,42 +133,50 @@ void post_order_destory(BiTree T)
 				p = temp;
 			}
 			else {
-				visit(p);
+				visit_bst(p);
 				p = NULL;	/* set p to NULL */
 			}
 		}
 	}
 }
 
+/*
+ * Threaded Binary Tree in order traverse
+ */
+void in_order_thread(ThreadTree T)
+{
+	ThreadNode *p = malloc(sizeof(ThreadNode));
+	for (p = first_node(T); p != NULL; p = next_node(p)) {
+		visit_thread(p);
+	}
+}
+
 int main(int argc, char *argv[])
 {
-	/* initialize tree structure */
-	BiTNode T;
-	BiTNode left_1, right_1, right_2, right_3, left_2;
-	T 		= (BiTNode) { 1, &left_1, &right_1 };
-	left_1 	= (BiTNode) { 2, NULL, &right_2 };
-	right_1 = (BiTNode) { 3, NULL, &right_3};
-	right_2 = (BiTNode) { 4, &left_2, NULL };
-	left_2 	= (BiTNode) { 6, NULL, NULL };
-	right_3 = (BiTNode) { 5,  NULL, NULL };
+	/* initialize toy trees */
 
-	BiTNode T_full;
-	BiTNode l1, r1, l2, r2;
-	T_full  = (BiTNode) { 1, &l1, &r1 };
-	l1 		= (BiTNode) { 2, &l2, &r2 };
-	r1 		= (BiTNode) { 3, NULL, NULL };
-	l2 		= (BiTNode) { 4, NULL, NULL };
-	r2 		= (BiTNode) { 5, NULL, NULL };
+	BiTree root = malloc(sizeof(BiTNode));
+	bst_toy(root);
 
-	BiTree root = &T;
-	BiTree root_full = &T_full;
+	BiTree root_complete = malloc(sizeof(BiTNode));
+	bst_toy_complete(root_complete);
 
-	pre_order_2(root_full);
+	ThreadTree root_thread = malloc(sizeof(ThreadNode));
+	thread_toy(root_thread);
+
+	printf("stack based post order traverse of complete tree\n");
+	post_order_2(root_complete);
 	printf("\n");
-	post_order(root);
+	printf("recursive in order traverse of tree\n");
+	in_order(root);
 	printf("\n");
-	post_order_2(root);
+	printf("recursive in order traverse of threaded tree\n");
+	in_order_thread(root_thread);
 	printf("\n");
+	// post_order(root);
+	// printf("\n");
+	// post_order_2(root);
+	// printf("\n");
 
 	return 0;
 }

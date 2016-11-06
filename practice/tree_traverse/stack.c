@@ -4,7 +4,7 @@
 
 void init_stack(a_stack *stack)
 {
-	(*stack).top = -1;
+	stack->top = -1;
 }
 
 int stack_empty(a_stack *stack)

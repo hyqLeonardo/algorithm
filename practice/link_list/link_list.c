@@ -101,6 +101,10 @@ single_llh *split_llh(single_llh *head) {
 
 int main(int argc, char *argv[])
 {
+	if (argc < 2) {
+		printf("give me a list of integers as link list values : )");
+		exit(0);
+	}
 	/* initialization */
 	single_llh *head = (single_llh *)malloc(sizeof(single_llh));
 	head->data = 0;
