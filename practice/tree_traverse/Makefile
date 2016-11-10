@@ -1,19 +1,20 @@
 #
-# Makefile for traverse algorithm 
+# Makefile for tree-traverse algorithm 
 #
 
 CC = gcc
 CFLAGS = -Wall -O2 -m32 -g
 
-OBJS = traverse.o stack.o bst.o tbt.o
+OBJS = traverse.o stack.o queue.o bst.o tbt.o
 
 traverse: $(OBJS)
 	$(CC) $(CFLAGS) -o traverse $(OBJS)
 
-traverse.o: traverse.c tbt.h bst.h stack.h
+traverse.o: traverse.c tbt.h bst.h stack.h queue.h
 tbt.o: tbt.c tbt.h
 bst.o: bst.c bst.h
 stack.o: stack.c stack.h bst.h
+queue.o: queue.c queue.h bst.h
 
 clean:
 	rm -f *~ *.o traverse

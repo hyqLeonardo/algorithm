@@ -8,6 +8,18 @@ void visit_bst(BiTree node)
 	printf("%d ", node->data);
 }
 
+/* bst_toy :
+ *
+ *         1
+ *        / \
+ *       /   \
+ *      /     \
+ *     2       3
+ *      \       \
+ *       4       5
+ *      /       
+ *     6       
+ */
 void bst_toy(BiTree root) 
 {
 
@@ -28,6 +40,16 @@ void bst_toy(BiTree root)
 	root->rchild = right_1;
 }
 
+/* bst_toy complete :
+ * 
+ *         1
+ *        / \
+ *       /   \
+ *      /     \
+ *     2       3
+ *    / \      
+ *   4   5      
+ */
 void bst_toy_complete(BiTree root) 
 {
 	BiTNode *left_1 	= malloc(sizeof(BiTNode));

@@ -1,3 +1,4 @@
+// #pragma once
 /* 
  * stack implementation
  */
@@ -7,7 +8,7 @@
 
 #include "bst.h"
 
-#define MaxSize 50
+#define MAXSIZE 50
 #define TRUE 1
 #define FALSE 0
 
@@ -15,7 +16,7 @@
  * struct definition of array based stack
  */
 typedef struct a_stack {
-	BiTree data[MaxSize];
+	BiTree data[MAXSIZE];
 	int top;	/* position of top element */
 } a_stack;
 

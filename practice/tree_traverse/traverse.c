@@ -7,7 +7,9 @@
 
 // "bst.h" already included from stack.h, so don't include again 
 // if included, error message : bst.h:6:16: error: redefinition of ‘struct BiTNode’
+// to make it easier, just add "#pragma once" in front of every header file !
 #include "stack.h"	/* for stack based implementation of BST traverse */
+#include "queue.h"	/* for traverse tree by layer */
 #include "tbt.h"	/* for Threaded Binary Tree */
 
 /* traverse using recursion */
@@ -151,10 +153,49 @@ void in_order_thread(ThreadTree T)
 	}
 }
 
+/* 
+ * Binary Search Tree traverse by layer, using array based queue
+ */
+void a_layer(BiTree T)
+{
+	a_queue *queue = malloc(sizeof(a_queue));
+	init_queue(queue);
+	enqueue(queue, T);
+	BiTNode *t;
+
+	while (!queue_empty(queue)) {
+		dequeue(queue, &t);
+		visit_bst(t);
+		if (t->lchild != NULL)
+			enqueue(queue, t->lchild);
+		if (t->rchild != NULL)
+			enqueue(queue, t->rchild);
+	}	
+}
+
+/* 
+ * Binary Search Tree traverse by layer, using link based queue
+ */
+void l_layer(BiTree T)
+{
+	l_queue *queue = malloc(sizeof(l_queue));
+	init_lqueue(queue);
+	enlqueue(queue, T);
+	BiTNode *t = malloc(sizeof(BiTNode));
+
+	while (!lqueue_empty(queue)) {
+		delqueue(queue, &t);
+		visit_bst(t);
+		if (t->lchild != NULL)
+			enlqueue(queue, t->lchild);
+		if (t->rchild != NULL)
+			enlqueue(queue, t->rchild);
+	}	
+}
+
 int main(int argc, char *argv[])
 {
 	/* initialize toy trees */
-
 	BiTree root = malloc(sizeof(BiTNode));
 	bst_toy(root);
 
@@ -164,6 +205,7 @@ int main(int argc, char *argv[])
 	ThreadTree root_thread = malloc(sizeof(ThreadNode));
 	thread_toy(root_thread);
 
+	/* traverse */
 	printf("stack based post order traverse of complete tree\n");
 	post_order_2(root_complete);
 	printf("\n");
@@ -173,10 +215,12 @@ int main(int argc, char *argv[])
 	printf("recursive in order traverse of threaded tree\n");
 	in_order_thread(root_thread);
 	printf("\n");
-	// post_order(root);
-	// printf("\n");
-	// post_order_2(root);
-	// printf("\n");
+	printf("traverse tree by layer\n");
+	l_layer(root);
+	printf("\n");
+	printf("traverse complete tree by layer\n");
+	l_layer(root_complete);
+	printf("\n");
 
 	return 0;
 }

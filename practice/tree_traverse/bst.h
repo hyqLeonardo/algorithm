@@ -1,3 +1,6 @@
+#pragma once	/* make sure this header is included once, 
+					both stack.h and queue.h need this header */
+
 #include <stdio.h>
 
 /* 

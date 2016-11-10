@@ -14,7 +14,7 @@ int stack_empty(a_stack *stack)
 
 int push(a_stack *stack, BiTree a)
 {
-	if (stack->top == MaxSize-1)
+	if (stack->top == MAXSIZE-1)	/* stack is full */
 		return FALSE;
 	stack->data[++stack->top] = a;
 	return TRUE; 
