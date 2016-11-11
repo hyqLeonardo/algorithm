@@ -1,5 +1,6 @@
 #
 # Makefile for tree-traverse algorithm 
+# '-g' option in 'CFLAGS' is for debug
 #
 
 CC = gcc

@@ -7,10 +7,11 @@
 
 // "bst.h" already included from stack.h, so don't include again 
 // if included, error message : bst.h:6:16: error: redefinition of ‘struct BiTNode’
-// to make it easier, just add "#pragma once" in front of every header file !
+// To make it easier, just add "#pragma once" in front of every header file !
+#include "bst.h"	/* for Binary Search Tree */
+#include "tbt.h"	/* for Threaded Binary Tree */
 #include "stack.h"	/* for stack based implementation of BST traverse */
 #include "queue.h"	/* for traverse tree by layer */
-#include "tbt.h"	/* for Threaded Binary Tree */
 
 /* traverse using recursion */
 void pre_order(BiTree T)
@@ -197,13 +198,16 @@ int main(int argc, char *argv[])
 {
 	/* initialize toy trees */
 	BiTree root = malloc(sizeof(BiTNode));
-	bst_toy(root);
+	btree_toy(root);
 
 	BiTree root_complete = malloc(sizeof(BiTNode));
-	bst_toy_complete(root_complete);
+	btree_toy_complete(root_complete);
 
 	ThreadTree root_thread = malloc(sizeof(ThreadNode));
 	thread_toy(root_thread);
+
+	BiTree bst_root = malloc(sizeof(BiTNode));
+	bst_toy(bst_root);
 
 	/* traverse */
 	printf("stack based post order traverse of complete tree\n");
@@ -220,6 +224,12 @@ int main(int argc, char *argv[])
 	printf("\n");
 	printf("traverse complete tree by layer\n");
 	l_layer(root_complete);
+	printf("\n");
+	printf("traverse BST tree by layer\n");
+	a_layer(bst_root);
+	printf("\n");
+	printf("in order traverse of BST tree\n");
+	in_order(bst_root);
 	printf("\n");
 
 	return 0;

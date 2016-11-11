@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdio.h>
 
 /* 
@@ -13,6 +15,6 @@ typedef struct ThreadNode {
 void visit_thread(ThreadTree node);
 void in_thread(ThreadTree p, ThreadTree *prev);
 void build_in_thread(ThreadTree T);
-void thread_toy(ThreadTree root);
 ThreadNode *first_node(ThreadNode *p);
 ThreadNode *next_node(ThreadNode *p);
+void thread_toy(ThreadTree root);

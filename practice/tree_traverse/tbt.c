@@ -45,6 +45,22 @@ void build_in_thread(ThreadTree T)
 	}
 }
 
+ThreadNode *first_node(ThreadNode *p)
+{
+	while (p->ltag == 0)
+		p = p->lchild;
+	return p;
+}
+
+ThreadNode *next_node(ThreadNode *p)
+{
+	if (p->rtag == 1)
+		return p->rchild;
+	else {
+		return first_node(p->rchild);
+	}
+}
+
 void thread_toy(ThreadTree root)
 {
 	ThreadNode *left_1		= malloc(sizeof(ThreadNode));
@@ -64,20 +80,4 @@ void thread_toy(ThreadTree root)
 	root->rchild = right_1;
 
 	build_in_thread(root);	/* create in-order threads */
-}
-
-ThreadNode *first_node(ThreadNode *p)
-{
-	while (p->ltag == 0)
-		p = p->lchild;
-	return p;
-}
-
-ThreadNode *next_node(ThreadNode *p)
-{
-	if (p->rtag == 1)
-		return p->rchild;
-	else {
-		return first_node(p->rchild);
-	}
 }

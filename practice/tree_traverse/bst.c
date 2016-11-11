@@ -8,7 +8,38 @@ void visit_bst(BiTree node)
 	printf("%d ", node->data);
 }
 
-/* bst_toy :
+int search_bst(BiTree root, int a, BiTNode **x)
+{
+	while (root) {
+		if (root->data == a) {
+			*x = root;
+			return TRUE;
+		}
+		if (root->data >= a)
+			return search_bst(root->lchild, a, x);
+		else
+			return search_bst(root->rchild, a, x);
+	}
+	return FALSE;
+}
+
+int insert_bst(BiTree *root, int a)
+{
+	if (*root == NULL || (*root)->data == 0) {
+		BiTNode *node = malloc(sizeof(BiTNode));
+		node->data = a;
+		*root = node;	/* insert here */
+		return TRUE;
+	}
+	else if ((*root)->data == a)
+		return FALSE;
+	else if ((*root)->data > a)
+		return insert_bst(&((*root)->lchild), a);
+	else
+		return insert_bst(&((*root)->rchild), a); 
+}
+
+/* btree_toy :
  *
  *         1
  *        / \
@@ -20,7 +51,7 @@ void visit_bst(BiTree node)
  *      /       
  *     6       
  */
-void bst_toy(BiTree root) 
+void btree_toy(BiTree root) 
 {
 
 	BiTNode *left_1		= malloc(sizeof(BiTNode));
@@ -40,7 +71,7 @@ void bst_toy(BiTree root)
 	root->rchild = right_1;
 }
 
-/* bst_toy complete :
+/* btree_toy complete :
  * 
  *         1
  *        / \
@@ -50,7 +81,7 @@ void bst_toy(BiTree root)
  *    / \      
  *   4   5      
  */
-void bst_toy_complete(BiTree root) 
+void btree_toy_complete(BiTree root) 
 {
 	BiTNode *left_1 	= malloc(sizeof(BiTNode));
 	BiTNode *right_1 	= malloc(sizeof(BiTNode));
@@ -65,4 +96,30 @@ void bst_toy_complete(BiTree root)
 	root->data = 1;
 	root->lchild = left_1;
 	root->rchild = right_1;
+}
+
+/* bst_toy :
+ *
+ *         5
+ *        / \
+ *       /   \
+ *      /     \
+ *     2       8
+ *    / \     / \
+ *   1   4   7   10
+ *      /   /   / 
+ *     3   6   9
+ */
+void bst_toy(BiTree root) 
+{
+	root->data = 5;
+	insert_bst(&root, 2);
+	insert_bst(&root, 8);
+	insert_bst(&root, 1);
+	insert_bst(&root, 4);
+	insert_bst(&root, 7);
+	insert_bst(&root, 10);
+	insert_bst(&root, 3);
+	insert_bst(&root, 6);
+	insert_bst(&root, 9);
 }
