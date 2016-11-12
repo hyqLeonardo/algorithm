@@ -197,9 +197,6 @@ void l_layer(BiTree T)
 
 int main(int argc, char *argv[])
 {
-	/* set environment variable for header files */
-	putenv("CPATH=../../include/tree/");
-
 	/* initialize toy trees */
 	BiTree root = malloc(sizeof(BiTNode));
 	btree_toy(root);
