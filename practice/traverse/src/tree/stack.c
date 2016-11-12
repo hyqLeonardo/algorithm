@@ -12,7 +12,7 @@ int stack_empty(a_stack *stack)
 	return stack->top == -1 ? TRUE : FALSE;
 }
 
-int push(a_stack *stack, BiTree a)
+int push(a_stack *stack, stack_elem_t a)
 {
 	if (stack->top == MAXSIZE-1)	/* stack is full */
 		return FALSE;
@@ -20,7 +20,7 @@ int push(a_stack *stack, BiTree a)
 	return TRUE; 
 }
 
-int pop(a_stack *stack, BiTree *x)
+int pop(a_stack *stack, stack_elem_t *x)
 {
 	if (stack->top == -1)
 		return FALSE;
@@ -28,7 +28,7 @@ int pop(a_stack *stack, BiTree *x)
 	return TRUE;		
 }
 
-int get_top(a_stack *stack, BiTree *x)
+int get_top(a_stack *stack, stack_elem_t *x)
 {
 	if (stack->top == -1)
 		return FALSE;

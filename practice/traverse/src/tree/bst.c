@@ -8,7 +8,7 @@ void visit_bst(BiTree node)
 	printf("%d ", node->data);
 }
 
-int search_bst(BiTree root, int a, BiTNode **x)
+int search_bst(BiTree root, bst_elem_t a, BiTNode **x)
 {
 	while (root) {
 		if (root->data == a) {
@@ -23,7 +23,7 @@ int search_bst(BiTree root, int a, BiTNode **x)
 	return FALSE;
 }
 
-int insert_bst(BiTree *root, int a)
+int insert_bst(BiTree *root, bst_elem_t a)
 {
 	if (*root == NULL || (*root)->data == 0) {
 		BiTNode *node = malloc(sizeof(BiTNode));

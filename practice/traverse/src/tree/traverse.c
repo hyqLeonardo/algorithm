@@ -5,9 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// "bst.h" already included from stack.h, so don't include again 
-// if included, error message : bst.h:6:16: error: redefinition of ‘struct BiTNode’
-// To make it easier, just add "#pragma once" in front of every header file !
+/** "bst.h" already included from stack.h, so don't include again. 
+	If included, error message : bst.h:6:16: error: redefinition of ‘struct BiTNode’
+	To make it easier, just add "#pragma once" in front of every header file !
+*/
 #include "bst.h"	/* for Binary Search Tree */
 #include "tbt.h"	/* for Threaded Binary Tree */
 #include "stack.h"	/* for stack based implementation of BST traverse */
@@ -196,6 +197,9 @@ void l_layer(BiTree T)
 
 int main(int argc, char *argv[])
 {
+	/* set environment variable for header files */
+	putenv("CPATH=../../include/tree/");
+
 	/* initialize toy trees */
 	BiTree root = malloc(sizeof(BiTNode));
 	btree_toy(root);

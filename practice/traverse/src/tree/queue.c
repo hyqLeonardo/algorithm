@@ -17,7 +17,7 @@ int queue_empty(a_queue *queue)
 		return FALSE;
 }
 
-int enqueue(a_queue *queue, BiTree a)
+int enqueue(a_queue *queue, queue_elem_t a)
 {
 	if ((queue->rear+1)%MAXSIZE == queue->front)	/* queue is full */
 		return FALSE;
@@ -26,7 +26,7 @@ int enqueue(a_queue *queue, BiTree a)
 	return TRUE;
 }
 
-int dequeue(a_queue *queue, BiTree *a)
+int dequeue(a_queue *queue, queue_elem_t *a)
 {
 	if (queue_empty(queue))
 		return FALSE;
@@ -52,7 +52,7 @@ int lqueue_empty(l_queue *queue)
 		return FALSE;
 }
 
-void enlqueue(l_queue *queue, BiTree a)
+void enlqueue(l_queue *queue, queue_elem_t a)
 {
 	/* create new node */
 	l_node *node = malloc(sizeof(l_node));
@@ -63,7 +63,7 @@ void enlqueue(l_queue *queue, BiTree a)
 	queue->rear = node;
 }
 
-int delqueue(l_queue *queue, BiTree *x)
+int delqueue(l_queue *queue, queue_elem_t *x)
 {
 	if (lqueue_empty(queue))
 		return FALSE;
